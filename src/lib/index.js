@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 const Components = {
-  EnosBanner: require('./enos/Banner.vue').default
+  enos: require('@/enos/enos.vue').default
 }
 
 Object.keys(Components).forEach(name => {

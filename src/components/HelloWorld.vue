@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <enos-banner></enos-banner>
+    <enos></enos>
   </div>
 </template>
 
