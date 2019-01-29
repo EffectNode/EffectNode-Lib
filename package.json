@@ -7,9 +7,9 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "githubbackup": "git add .; git commit -am \"github backup\"; git push -u origin master",
+    "github": "git add .; git commit -am \"github backup\"; git push -u origin master",
     "build-bundle": "vue-cli-service build --target lib --name enos ./src/lib/index.js",
-    "deploy": "npm run build-bundle; npm run githubbackup; release-it minor;"
+    "deploy": "npm run build-bundle; npm run github; release-it minor;"
   },
   "files": [
     "dist/*",
