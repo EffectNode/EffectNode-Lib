@@ -1,6 +1,6 @@
 {
   "name": "enos",
-  "version": "v0.3.0",
+  "version": "0.4.1-pre",
   "private": false,
   "main": "./dist/enos.common.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "lint": "vue-cli-service lint",
     "githubbackup": "git add .; git commit -am \"github backup\"; git push -u origin master",
     "build-bundle": "vue-cli-service build --target lib --name enos ./src/lib/index.js",
-    "deploy": "npm run githubbackup; npm run build-bundle; auto-bump patch; npm publish;"
+    "deploy": "npm run build-bundle; npm run githubbackup; release-it minor;"
   },
   "files": [
     "dist/*",
@@ -28,14 +28,13 @@
     "@vue/cli-plugin-eslint": "^3.3.0",
     "@vue/cli-service": "^3.3.0",
     "@vue/eslint-config-standard": "^4.0.0",
-    "auto-bump": "0.0.10",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
     "node-sass": "^4.11.0",
     "npm-bump": "0.0.25",
+    "release-it": "^10.0.6",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.5.21"
-  },
-  "autoBump": {}
+  }
 }
