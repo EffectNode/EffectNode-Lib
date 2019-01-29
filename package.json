@@ -1,18 +1,30 @@
 {
-  "name": "effectnode-lib",
-  "version": "0.1.0",
-  "private": true,
+  "name": "enos",
+  "version": "0.1.1",
+  "private": false,
+  "main": "./dist/enos.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "build-bundle": "vue-cli-service build --target lib --name effectnodelib ./src/lib/index.js"
+    "githubbackup": "git add .; git commit -am \"github backup\"; git push -u origin master",
+    "build-bundle": "vue-cli-service build --target lib --name enos ./src/lib/index.js",
+    "deploy": "npm run githubbackup; npm run build-bundle; npm publish;"
   },
+  "files": [
+    "dist/*",
+    "src/*",
+    "public/*",
+    "*.json",
+    "*.js"
+  ],
   "dependencies": {
+    "node-sass": "^4.11.0",
     "vue": "^2.5.21",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "sass-loader": "^7.1.0",
     "@vue/cli-plugin-babel": "^3.3.0",
     "@vue/cli-plugin-eslint": "^3.3.0",
     "@vue/cli-service": "^3.3.0",
