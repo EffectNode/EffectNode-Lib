@@ -1,22 +1,22 @@
 <template>
   <div class="hello">
-    <enos v-if="moreApps" :more-apps="moreApps"></enos>
+    <enos v-if="myApps" :apps="myApps"></enos>
   </div>
 </template>
 
 <script>
-import Compos from '../lib/index.js'
+import ENOSCompos from '../lib/index.js'
 export default {
   components: {
-    ...Compos
+    ...ENOSCompos
   },
   data () {
     return {
-      moreApps: false
+      myApps: false
     }
   },
   mounted () {
-    this.moreApps = [
+    this.myApps = [
       {
         windowTitle: 'Sample',
         compoName: 'SampleApp',

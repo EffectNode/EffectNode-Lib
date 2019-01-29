@@ -52,13 +52,4 @@ export default {
   overflow: auto;
   position: relative;
 }
-
-.quotes-list{
-  margin: 20px;
-}
-
-.iframe{
-  width: 100%;
-  height: calc(100%);
-}
 </style>

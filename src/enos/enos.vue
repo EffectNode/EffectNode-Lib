@@ -19,7 +19,7 @@ Vue.component('vue-draggable-resizable', VueDraggableResizable)
 
 export default {
   props: {
-    moreApps: {
+    apps: {
       default () {
         return []
       }
@@ -45,7 +45,7 @@ export default {
       sessionID = window.localStorage.getItem(NS)
     }
 
-    AppOS.setAppList(this.moreApps)
+    AppOS.setAppList(this.apps)
 
     Promise.all([
       PortalAPI.init()
