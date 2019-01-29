@@ -1,24 +1,20 @@
 <template>
   <div class="full ll-perspective dont-move">
     <div tag="div" class="full ll-cam" name="zoomba" :style="getGroupCSS()">
-      <div
-      :key="ip.id"
-      v-for="(ip, ipi) in uiAPI.portal.portals.slice().sort((a, b) => {
-          let da = new Date(a.date)
-          let db = new Date(b.date)
-          if (da > db) {
-            return 1
-          } else if (da === db) {
-            return 0
-          } else {
-            return -1
-          }
-        })"
 
-      >
           <vue-draggable-resizable
-
-            v-if="!ip.win.minimised"
+            :key="ip.id"
+            v-for="(ip, ipi) in uiAPI.portal.portals.slice().sort((a, b) => {
+              let da = new Date(a.date)
+              let db = new Date(b.date)
+              if (da > db) {
+                return 1
+              } else if (da === db) {
+                return 0
+              } else {
+                return -1
+              }
+            })"
 
             :w="ip.win.width"
             :h="ip.win.height"
@@ -59,7 +55,6 @@
                 ></Component>
               </keep-alive>
           </vue-draggable-resizable>
-        </div>
 
     </div>
 
@@ -107,14 +102,20 @@ export default {
     // NoteApp: require('@/enos/Apps/NoteApp/NoteApp.vue').default,
     ...AppList.Apps()
   },
-  created () {
-  },
   data () {
     return {
       opened: false,
       resizeTimeout: 0,
       sct: 0
     }
+  },
+  beforeCreate () {
+    let apps = AppList.Apps()
+    Object.keys(apps).forEach(kn => {
+      this.$options.components[kn] = apps[kn]
+    })
+  },
+  created () {
   },
   mounted () {
     this.loadLS()
@@ -255,6 +256,9 @@ export default {
 </script>
 
 <style lang="css">
+  .vdr{
+    border: none !important;
+  }
   .handle.handle-br{
     border: none !important;
     /* background: linear-gradient(90deg, #FC466B 0%, cyan 100%) !important; */

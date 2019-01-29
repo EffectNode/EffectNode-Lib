@@ -1,4 +1,4 @@
-export const AppList = [
+export var AppList = [
   {
     windowTitle: 'Demo',
     compoName: 'SysApp',
@@ -6,10 +6,22 @@ export const AppList = [
   }
 ]
 
-export const Apps = () => AppList.reduce((c, ii) => {
-  c[ii.compoName] = ii.App
-  return c
-}, {})
+var accessor = {
+  get _AL () {
+    return AppList.reduce((c, ii) => {
+      c[ii.compoName] = ii.App
+      return c
+    }, {})
+  }
+}
+
+export const setAppList = (apps) => {
+  if (apps && apps.length > 0) {
+    AppList = apps
+  }
+}
+
+export const Apps = () => accessor._AL
 
 export const TypeFilter = (type) => {
   return (AppList.find(tc => tc.compoName === type) || {}).compoName

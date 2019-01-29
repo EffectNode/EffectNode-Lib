@@ -1,6 +1,7 @@
 import Vue from 'vue'
 
 const Components = {
+  titlebar: require('@/enos/Apps/AppShared/TitleBar/TitleBar.vue').default,
   enos: require('@/enos/enos.vue').default
 }
 

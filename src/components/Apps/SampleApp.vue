@@ -1,15 +1,17 @@
 <template>
   <div class="full window-app">
-    <TitleBar @click="$emit('activated')" :portal="portal" :uiAPI="uiAPI">
-      App Template
-    </TitleBar>
-    <div class="content-div" @click="$emit('activated')">{{ rr }}
+    <titlebar @click="$emit('activated')" :portal="portal" :uiAPI="uiAPI">
+      Sample App
+    </titlebar>
+    <div class="content-div" @click="$emit('activated')">
+      {{ rr }}
+      Content
     </div>
   </div>
 </template>
 
 <script>
-import TitleBar from '../AppShared/TitleBar/TitleBar'
+import Compos from '../../lib/index.js'
 
 export default {
   props: {
@@ -17,7 +19,7 @@ export default {
     portal: {}
   },
   components: {
-    TitleBar
+    ...Compos
     // Dimension
   },
   data () {
@@ -34,8 +36,6 @@ export default {
 </script>
 
 <style scoped>
-@import url(../../Compos/jot.css);
-
 .window-app{
   background: white;
   /* background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%); */

@@ -12,11 +12,22 @@ import 'web-animations-js'
 import Screen from '@/enos/Compos/Screen/Screen.vue'
 import Portals from '@/enos/Compos/Portals/Portals'
 import * as PortalAPI from '@/enos/Compos/APIs/portals.js'
-// import * as YoNetAPI from '@/enos/Compos/APIs/yoNet.js'
+import * as AppOS from './AppList'
+import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
 
 Vue.component('vue-draggable-resizable', VueDraggableResizable)
 
 export default {
+  props: {
+    moreApps: {
+      default () {
+        return []
+      }
+    },
+    ns: {
+      default: 'RandomSessionIDForEffectNodeOS'
+    }
+  },
   components: {
     Screen,
     Portals
@@ -27,13 +38,22 @@ export default {
     }
   },
   async mounted () {
+    let NS = this.ns
+    let sessionID = window.localStorage.getItem(NS)
+    if (!sessionID) {
+      window.localStorage.setItem(NS, `${NS}-@-` + Number(Math.random() * 1024 * 1024 * 1024 * 1024 * 1024).toFixed(0))
+      sessionID = window.localStorage.getItem(NS)
+    }
+
+    AppOS.setAppList(this.moreApps)
+
     Promise.all([
       PortalAPI.init()
     ]).then((res) => {
+      let portal = res[0]
       this.uiAPI = {
-        portal: res[0],
-        // yo: YoNetAPI,
-        sessionID: 'effectnode-local-session-defualt-ID'
+        portal,
+        sessionID
       }
     })
   },
