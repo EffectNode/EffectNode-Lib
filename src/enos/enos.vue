@@ -57,17 +57,17 @@ export default {
         {
           windowTitle: 'Effect Node Editor',
           compoName: 'enedit',
-          App: () => import('./Apps/enEdit/enEdit.vue')
+          App: require('./Apps/enEdit/enEdit.vue').default
         },
         {
           windowTitle: 'Animation Preview Window',
           compoName: 'enpreview',
-          App: () => import('./Apps/enPreview/enPreview.vue')
+          App: require('./Apps/enPreview/enPreview.vue').default
         },
         {
           windowTitle: 'Mod Editor Window',
           compoName: 'enmodedit',
-          App: () => import('./Apps/modEdit/modEdit.vue'),
+          App: require('./Apps/modEdit/modEdit.vue').default,
           hidden: true
         },
         ...adder
