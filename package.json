@@ -1,6 +1,6 @@
 {
   "name": "enos",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "private": false,
   "main": "./dist/enos.common.js",
   "scripts": {
