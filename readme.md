@@ -5,8 +5,8 @@
 [demo-1]: https://raw.githubusercontent.com/EffectNode/EffectNode-Lib/master/public/demo/enos.png
 # Demo
 
-[Live Demo](https://codesandbox.io/s/r7oy8r2nmn)
-
+[Live Demo wihtout Effect Node](https://codesandbox.io/s/r7oy8r2nmn)
+[Live Demo with Effect Node](https://codesandbox.io/s/vj67lqm9m3)
 
 # Demo Code
 ## App.vue
