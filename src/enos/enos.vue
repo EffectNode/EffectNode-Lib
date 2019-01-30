@@ -12,6 +12,8 @@ import 'web-animations-js'
 import Screen from '@/enos/Compos/Screen/Screen.vue'
 import Portals from '@/enos/Compos/Portals/Portals'
 import * as PortalAPI from '@/enos/Compos/APIs/portals.js'
+import * as EffectNodeAPI from '@/enos/Compos/APIs/effectnode.js'
+import * as BuilderAPI from '@/enos/Compos/APIs/builder.js'
 import * as AppOS from './AppList'
 import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
 
@@ -25,7 +27,10 @@ export default {
       }
     },
     ns: {
-      default: 'RandomSessionIDForEffectNodeOS'
+      default: 'RSSID'
+    },
+    effectnode: {
+      default: false
     }
   },
   components: {
@@ -45,17 +50,60 @@ export default {
       sessionID = window.localStorage.getItem(NS)
     }
 
-    AppOS.setAppList(this.apps)
+    let adder = this.apps
 
-    Promise.all([
-      PortalAPI.init()
-    ]).then((res) => {
-      let portal = res[0]
-      this.uiAPI = {
-        portal,
+    if (this.effectnode) {
+      adder = [
+        {
+          windowTitle: 'Effect Node Editor',
+          compoName: 'enedit',
+          App: () => import('./Apps/enEdit/enEdit.vue')
+        },
+        {
+          windowTitle: 'Animation Preview Window',
+          compoName: 'enpreview',
+          App: () => import('./Apps/enPreview/enPreview.vue')
+        },
+        {
+          windowTitle: 'Mod Editor Window',
+          compoName: 'enmodedit',
+          App: () => import('./Apps/modEdit/modEdit.vue'),
+          hidden: true
+        },
+        ...adder
+      ]
+    }
+
+    AppOS.setAppList(adder)
+
+    // effectnode
+    let apis = [
+      PortalAPI.init(),
+      EffectNodeAPI.init({
         sessionID
-      }
-    })
+      })
+    ]
+
+    Promise.all(apis)
+      .then((res) => {
+        let portal = res[0]
+        let { Doc } = res[1]
+
+        this.uiAPI = {
+          Builder: BuilderAPI,
+          projectID: sessionID,
+          userID: sessionID,
+
+          portal,
+          enAPI: EffectNodeAPI,
+          Doc,
+          hive: {
+            Data: EffectNodeAPI,
+            Doc
+          },
+          sessionID
+        }
+      })
   },
   methods: {
 

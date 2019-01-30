@@ -3,6 +3,9 @@ import '@/enos/enos.vue'
 
 const Components = {
   titlebar: require('@/enos/Apps/AppShared/TitleBar/TitleBar.vue').default,
+
+  Animator: require('@/enos/Compos/Animator/Animator.vue').default,
+  PreviewFrame: require('@/enos/Compos/PreviewFrame/PreviewFrame.vue').default,
   enos: require('@/enos/enos.vue').default
 }
 

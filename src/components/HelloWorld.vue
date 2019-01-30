@@ -1,11 +1,12 @@
 <template>
   <div class="hello">
-    <enos v-if="myApps" :apps="myApps"></enos>
+    <enos v-if="myApps" :effectnode="true" :apps="myApps"></enos>
   </div>
 </template>
 
 <script>
 import ENOSCompos from '../lib/index.js'
+
 export default {
   components: {
     ...ENOSCompos
@@ -19,8 +20,8 @@ export default {
     this.myApps = [
       {
         windowTitle: 'Sample',
-        compoName: 'SampleApp',
-        App: require('./Apps/sample-app.vue').default
+        compoName: 'samsam',
+        App: require('./Apps/samsam.vue').default
       }
     ]
   }

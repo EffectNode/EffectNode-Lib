@@ -1,4 +1,4 @@
-import Vue from 'vue'
+// import Vue from 'vue'
 export var AppList = [
   {
     windowTitle: 'Demo',
@@ -10,7 +10,6 @@ export var AppList = [
 var accessor = {
   get _AL () {
     return AppList.reduce((c, ii) => {
-      Vue.component(ii.compoName, ii.App)
       c[ii.compoName] = ii.App
       return c
     }, {})
@@ -30,5 +29,5 @@ export const TypeFilter = (type) => {
 }
 
 export const StartMenu = () => {
-  return AppList.slice()
+  return AppList.slice().filter(e => !e.hidden)
 }

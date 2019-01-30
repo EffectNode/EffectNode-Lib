@@ -44,7 +44,7 @@ export function organise (api) {
     api.portals.forEach((ip, idx) => {
       ip.win.x = 30 * (idx + 1)
       ip.win.y = 30 * (idx + 1)
-      ip.win.width = w > 359 ? 359 : w
+      ip.win.width = w > 600 ? 600 : w
       ip.win.height = h > 500 ? 500 : h
       setTimeout(() => {
         ip.win.minimised = true
@@ -82,7 +82,7 @@ export function makeWin (id, appName) {
   let win = {
     id: getID(),
     name: appName,
-    width: w > 350 ? 350 : w,
+    width: w > 600 ? 600 : w,
     height: h > 500 ? 500 : h,
     x: 20 + temp.x,
     y: 20 + temp.y,
