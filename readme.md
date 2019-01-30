@@ -8,7 +8,8 @@
 [Live Demo](https://codesandbox.io/s/r7oy8r2nmn)
 
 
-#Demo Code
+# Demo Code
+## App.vue
 
 ```vue
 
@@ -51,6 +52,7 @@ export default {
 
 ```
 
+## ./apps/samsam.vue
 ```vue
 
 <template>
