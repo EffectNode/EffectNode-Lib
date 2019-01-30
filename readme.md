@@ -19,7 +19,6 @@
 
 <script>
 import ENOSCompos from "enos";
-import "enos/dist/enos.css";
 
 export default {
   components: {
