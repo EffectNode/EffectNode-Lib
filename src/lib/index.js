@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import '@/enos/enos.vue'
 
 const Components = {
   titlebar: require('@/enos/Apps/AppShared/TitleBar/TitleBar.vue').default,

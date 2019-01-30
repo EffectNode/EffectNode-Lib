@@ -20,7 +20,7 @@ export default {
       {
         windowTitle: 'Sample',
         compoName: 'SampleApp',
-        App: require('./Apps/SampleApp.vue').default
+        App: require('./Apps/sample-app.vue').default
       }
     ]
   }
