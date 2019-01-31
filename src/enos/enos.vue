@@ -73,6 +73,7 @@ export default {
       this.init({ sessionID: projectID })
     },
     async init ({ sessionID }) {
+      this.uiAPI = false
       this.view = 'enos'
       let adder = this.apps
 

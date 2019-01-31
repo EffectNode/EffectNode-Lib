@@ -324,5 +324,4 @@ export default {
   opacity: 0;
   transform: scale(0);
 }
-
 </style>

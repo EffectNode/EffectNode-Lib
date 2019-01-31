@@ -4,6 +4,7 @@
 
 [demo-1]: https://raw.githubusercontent.com/EffectNode/EffectNode-Lib/master/public/demo/enos.png
 # Demo
+[Live Demo with Effect Node Build with WebPack](https://enos.netlify.com)
 
 [Live Demo wihtout Effect Node](https://codesandbox.io/s/r7oy8r2nmn)
 
