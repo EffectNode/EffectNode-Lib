@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Local Storage Projects</h1>
+    <h1>Projects in window.localStorage</h1>
     <span class="linker" @click="addProject">Add Project</span>
     <ul>
       <li :key="project.projectID" v-for="project in projects">

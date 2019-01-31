@@ -3,6 +3,13 @@
 ![EffectNode OS][demo-1]
 
 [demo-1]: https://raw.githubusercontent.com/EffectNode/EffectNode-Lib/master/public/demo/enos.png
+
+# Install
+
+```
+npm i enos --save
+```
+
 # Demo
 [Live Demo with Effect Node Build with WebPack](https://enos.netlify.com)
 
