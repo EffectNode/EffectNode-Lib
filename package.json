@@ -5,11 +5,12 @@
   "main": "./dist/enos.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --dest web",
     "lint": "vue-cli-service lint",
     "github": "git add .; git commit -am \"github backup\"; git push -u origin master",
     "build-bundle": "vue-cli-service build --target lib --name enos ./src/lib/index.js",
-    "deploy": "npm run build-bundle; npm run github; release-it minor;"
+    "deploy": "npm run build; npm run web; npm run build-bundle; npm run github; release-it minor;",
+    "web": "netlify deploy --dir=web --prod"
   },
   "files": [
     "dist/*",

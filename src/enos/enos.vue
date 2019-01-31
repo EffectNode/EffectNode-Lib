@@ -1,6 +1,7 @@
 <template>
   <Screen class="over-hidden">
-    <Portals v-if="uiAPI" :uiAPI="uiAPI">
+    <Projects v-if="view === 'projects'" :ns="pjsID" @load="loadProject" @remove-projec="removeProject"></Projects>
+    <Portals v-if="view === 'enos' && uiAPI" :uiAPI="uiAPI" @view="(v) => { view = v }">
     </Portals>
   </Screen>
 </template>
@@ -15,9 +16,12 @@ import * as PortalAPI from '@/enos/Compos/APIs/portals.js'
 import * as EffectNodeAPI from '@/enos/Compos/APIs/effectnode.js'
 import * as BuilderAPI from '@/enos/Compos/APIs/builder.js'
 import * as AppOS from './AppList'
+import Projects from './Compos/Projects/Projects.vue'
 import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
 
 Vue.component('vue-draggable-resizable', VueDraggableResizable)
+
+let getID = () => '_' + Math.random().toString(36).substr(2, 9)
 
 export default {
   props: {
@@ -25,6 +29,9 @@ export default {
       default () {
         return []
       }
+    },
+    pjsID: {
+      default: 'ENPJ'
     },
     ns: {
       default: 'RSSID'
@@ -35,78 +42,93 @@ export default {
   },
   components: {
     Screen,
-    Portals
+    Portals,
+    Projects
   },
   data () {
     return {
-      uiAPI: false
+      view: 'projects',
+      uiAPI: false,
+      sessionID: 0
     }
   },
   async mounted () {
     let NS = this.ns
     let sessionID = window.localStorage.getItem(NS)
     if (!sessionID) {
-      window.localStorage.setItem(NS, `${NS}-@-` + Number(Math.random() * 1024 * 1024 * 1024 * 1024 * 1024).toFixed(0))
+      window.localStorage.setItem(NS, `${NS}-@-` + Math.random().toString(36).substr(2, 9))
       sessionID = window.localStorage.getItem(NS)
     }
 
-    let adder = this.apps
-
-    if (this.effectnode) {
-      adder = [
-        {
-          windowTitle: 'Effect Node Editor',
-          compoName: 'enedit',
-          App: require('./Apps/enEdit/enEdit.vue').default
-        },
-        {
-          windowTitle: 'Animation Preview Window',
-          compoName: 'enpreview',
-          App: require('./Apps/enPreview/enPreview.vue').default
-        },
-        {
-          windowTitle: 'Mod Editor Window',
-          compoName: 'enmodedit',
-          App: require('./Apps/modEdit/modEdit.vue').default,
-          hidden: true
-        },
-        ...adder
-      ]
+    if (!this.effectnode) {
+      this.init({ sessionID: getID() })
+    } else {
     }
-
-    AppOS.setAppList(adder)
-
-    // effectnode
-    let apis = [
-      PortalAPI.init(),
-      EffectNodeAPI.init({
-        sessionID
-      })
-    ]
-
-    Promise.all(apis)
-      .then((res) => {
-        let portal = res[0]
-        let { Doc } = res[1]
-
-        this.uiAPI = {
-          Builder: BuilderAPI,
-          projectID: sessionID,
-          userID: sessionID,
-
-          portal,
-          enAPI: EffectNodeAPI,
-          Doc,
-          hive: {
-            Data: EffectNodeAPI,
-            Doc
-          },
-          sessionID
-        }
-      })
   },
   methods: {
+    removeProject ({ projectID }) {
+      EffectNodeAPI.removeDB({ sess: projectID })
+    },
+    loadProject ({ projectID }) {
+      this.init({ sessionID: projectID })
+    },
+    async init ({ sessionID }) {
+      this.view = 'enos'
+      let adder = this.apps
 
+      if (this.effectnode) {
+        adder = [
+          {
+            windowTitle: 'Effect Node Editor',
+            compoName: 'enedit',
+            App: require('./Apps/enEdit/enEdit.vue').default
+          },
+          {
+            windowTitle: 'Animation Preview Window',
+            compoName: 'enpreview',
+            App: require('./Apps/enPreview/enPreview.vue').default
+          },
+          {
+            windowTitle: 'Mod Editor Window',
+            compoName: 'enmodedit',
+            App: require('./Apps/modEdit/modEdit.vue').default,
+            hidden: true
+          },
+          ...adder
+        ]
+      }
+
+      AppOS.setAppList(adder)
+
+      // effectnode
+      let apis = [
+        PortalAPI.init(),
+        EffectNodeAPI.init({
+          sessionID
+        })
+      ]
+
+      Promise.all(apis)
+        .then((res) => {
+          let portal = res[0]
+          let { Doc } = res[1]
+
+          this.uiAPI = {
+            Builder: BuilderAPI,
+            projectID: sessionID,
+            userID: sessionID,
+
+            portal,
+            enAPI: EffectNodeAPI,
+            Doc,
+            hive: {
+              Data: EffectNodeAPI,
+              Doc
+            },
+            sessionID
+          }
+        })
+    }
   }
 }
 </script>

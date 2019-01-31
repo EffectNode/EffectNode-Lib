@@ -5,6 +5,9 @@
         <div class="taskbar-icon disconnected" v-if="isDisconnected">
           Offline
         </div>
+        <div class="taskbar-icon home" @click="$emit('view', 'projects')">
+          Home
+        </div>
         <div class="taskbar-icon home" @click="startMenu = true">
           Open App
         </div>
@@ -44,9 +47,7 @@
       <div class="start-title-bar">Fun Fun App Store</div>
       <div class="start-content-div">
         <div class="start-content-div-margin">
-          <!-- <div class="app-icon adder" @click="closeMenu(); uiAPI.portal.addWindow({ type: 'quotes' })">
-            Quotes
-          </div>
+          <!--
           <div class="app-icon adder" @click="closeMenu(); uiAPI.portal.addWindow({ type: 'animation' })">
             Roll
           </div> -->

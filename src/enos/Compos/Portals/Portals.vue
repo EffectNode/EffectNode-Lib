@@ -64,6 +64,9 @@
       @activated="(v) => {
         onActivated(v.portal)
       }"
+      @view="(v) => {
+        $emit('view', v)
+      }"
       @opened="(v) => {
         opened = v
       }"

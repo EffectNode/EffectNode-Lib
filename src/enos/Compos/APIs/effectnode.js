@@ -1,6 +1,6 @@
 var getID = (prefix) => {
   prefix = prefix || ''
-  return '_hive_' + prefix + '_' + (1024 * 1024 * 1024 * 1024 * Math.random()).toFixed(0)
+  return '_hive_' + prefix + '_' + (Math.random().toString(36).substr(2, 9))
 }
 
 export const DomModule = `/* global env */
@@ -118,7 +118,12 @@ Input('onClock', (evt) => {
 //   }
 // }
 
-let NS = 'effectnode-project'
+export const NS = 'effectnode-project'
+
+export const removeDB = ({ sess }) => {
+  window.localStorage.removeItem(`${NS}-${sess}`)
+}
+
 export const saveDB = ({ sess, data }) => {
   window.localStorage.setItem(`${NS}-${sess}`, JSON.stringify(data))
 }
@@ -189,8 +194,8 @@ export const makeMod = ({ Doc, src, name }) => {
     name: name,
     src: src,
     pos: {
-      x: 50,
-      y: 100
+      x: 50 + Math.random() * 10,
+      y: 100 + Math.random() * 10
     },
     meta: JSON.parse(JSON.stringify([]))
   })
