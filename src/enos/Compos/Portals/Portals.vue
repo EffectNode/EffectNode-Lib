@@ -188,8 +188,8 @@ export default {
       }
     },
     loadLS () {
-      let items = window.localStorage.getItem(this.uiAPI.sessionID + 'portals-yo-education')
-      let meta = window.localStorage.getItem(this.uiAPI.sessionID + 'portals-meta-yo-education')
+      let items = window.localStorage.getItem(this.uiAPI.sessionID + 'portals-enos')
+      let meta = window.localStorage.getItem(this.uiAPI.sessionID + 'portals-meta-enos')
       try {
         if (items && meta) {
           this.uiAPI.portal.portals = JSON.parse(items)
@@ -212,8 +212,8 @@ export default {
     },
     shouldSave () {
       this.$nextTick(() => {
-        window.localStorage.setItem(this.uiAPI.sessionID + 'portals-meta-yo-education', JSON.stringify(this.uiAPI.portal.meta))
-        window.localStorage.setItem(this.uiAPI.sessionID + 'portals-yo-education', JSON.stringify(this.uiAPI.portal.portals))
+        window.localStorage.setItem(this.uiAPI.sessionID + 'portals-meta-enos', JSON.stringify(this.uiAPI.portal.meta))
+        window.localStorage.setItem(this.uiAPI.sessionID + 'portals-enos', JSON.stringify(this.uiAPI.portal.portals))
       })
     },
     onActivated (ip) {

@@ -1,6 +1,6 @@
 <template>
   <Screen class="over-hidden">
-    <Projects v-if="view === 'projects'" :ns="pjsID" @load="loadProject" @remove-projec="removeProject"></Projects>
+    <Projects v-if="view === 'projects'" :ns="pjsID" @load="loadProject" @remove-project="removeProject"></Projects>
     <Portals v-if="view === 'enos' && uiAPI" :uiAPI="uiAPI" @view="(v) => { view = v }">
     </Portals>
   </Screen>
@@ -67,6 +67,7 @@ export default {
   },
   methods: {
     removeProject ({ projectID }) {
+      PortalAPI.removeDB({ sess: projectID })
       EffectNodeAPI.removeDB({ sess: projectID })
     },
     loadProject ({ projectID }) {

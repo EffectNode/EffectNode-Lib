@@ -81,9 +81,10 @@ export default {
       this.saveProjects()
     },
     removeProject (project) {
-      if (window.confirm('delte?')) {
+      if (window.confirm('remove project? ' + project.name)) {
         this.projects.splice(this.projects.findIndex(pj => pj.projectID === project.projectID), 1)
         this.$emit('remove-project', project)
+        this.saveProjects()
       }
     },
     saveProjects () {

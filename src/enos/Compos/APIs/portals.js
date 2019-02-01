@@ -1,5 +1,10 @@
 import * as AppList from '@/enos/AppList.js'
 
+export const removeDB = ({ sess }) => {
+  window.localStorage.removeItem(sess + 'portals-meta-enos')
+  window.localStorage.removeItem(sess + 'portals-enos')
+}
+
 // import * as API from './API'
 export function getID () {
   return '_' + (Math.random() * 100000000).toFixed(0)

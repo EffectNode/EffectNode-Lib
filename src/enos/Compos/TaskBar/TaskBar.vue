@@ -9,7 +9,7 @@
           Home
         </div>
         <div class="taskbar-icon home" @click="startMenu = true">
-          Open App
+          My Apps
         </div>
         <div class="taskbar-icon button3d" v-if="toggle3D && uiAPI.portal.portals.length > 0" @click="toggle3DSpace">
           2D 🦄

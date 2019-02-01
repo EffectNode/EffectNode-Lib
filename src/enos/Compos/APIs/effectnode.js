@@ -141,6 +141,9 @@ export const hydrateDoc = ({ Doc }) => {
   let dbData = loadDB({ sess: Doc.sessionID })
   if (dbData) {
     Doc.root = dbData
+  } else {
+    let defaultJSON = require('./default-en.json')
+    Doc.root = defaultJSON.root
   }
 }
 export const saveDoc = ({ Doc }) => {
