@@ -2,12 +2,15 @@
   <div>
     <h1>Projects in window.localStorage</h1>
     <span class="linker" @click="addProject">Add Project</span>
+    <span class="linker" @click="loadProject"> Load Project</span>
+
     <ul>
       <li :key="project.projectID" v-for="project in projects">
         <input type="text" v-model="project.name" @input="saveProjects()" />
 
-        <span class="linker" @click="$emit('load', project)">Load </span>
+        <span class="linker" @click="$emit('load', project)"> Enter </span>
         <span class="linker" @click="removeProject(project)" v-if="projects.length > 1"> Remove</span>
+        <span class="linker" @click="exportProject(project)"> Export </span>
 
       </li>
     </ul>
@@ -15,11 +18,15 @@
 </template>
 
 <script>
+import * as EffectNodeAPI from '@/enos/Compos/APIs/effectnode.js'
+
 let getID = () => '_' + Math.random().toString(36).substr(2, 9)
 
 export default {
   props: {
-    ns: {}
+    ns: {
+      default: 'ENPJ'
+    }
   },
   data () {
     return {
@@ -30,6 +37,42 @@ export default {
     this.hydrateProjects()
   },
   methods: {
+    loadProject () {
+      let input = document.createElement('input')
+      input.type = 'file'
+      input.onchange = (evt) => {
+        let files = evt.target.files
+        if (files[0]) {
+          let sess = getID()
+          let reader = new FileReader()
+          reader.onload = () => {
+            try {
+              var data = JSON.parse(reader.result)
+              EffectNodeAPI.saveDB({ sess, data })
+              this.projects.push({
+                projectID: sess,
+                name: window.prompt('new name of the imported project?') || 'imported project'
+              })
+              this.saveProjects()
+            } catch (e) {
+
+            }
+          }
+          reader.readAsText(files[0])
+        }
+      }
+      input.click()
+    },
+    exportProject ({ projectID }) {
+      let db = EffectNodeAPI.loadDB({ sess: projectID })
+      if (db) {
+        let link = URL.createObjectURL(new Blob([JSON.stringify(db, null, '  ')], { type: 'application/json' }))
+        let a = document.createElement('a')
+        a.href = link
+        a.download = 'project.json'
+        a.click()
+      }
+    },
     addProject () {
       this.projects.push({
         projectID: getID(),

@@ -51,26 +51,26 @@ export function organise (api) {
       }, 100)
     })
 
-    // let connectorApp = api.portals.find(a => a.app === 'ConnectorApp')
-    // if (connectorApp) {
-    //   connectorApp.win.x = 20
-    //   connectorApp.win.y = 20
-    //   connectorApp.win.minimised = true
-    //   setTimeout(() => {
-    //     connectorApp.win.minimised = false
-    //   }, 10)
-    // }
-    // let previewApp = api.portals.find(a => a.app === 'ExecEnvApp')
-    // if (previewApp) {
-    //   previewApp.win.width = 400
-    //   previewApp.win.height = 300
-    //   previewApp.win.x = window.innerWidth - previewApp.win.width - 20
-    //   previewApp.win.y = 20
-    //   previewApp.win.minimised = true
-    //   setTimeout(() => {
-    //     previewApp.win.minimised = false
-    //   }, 10)
-    // }
+    let connectorApp = api.portals.find(a => a.app === 'enedit')
+    if (connectorApp) {
+      connectorApp.win.x = 20
+      connectorApp.win.y = 20
+      connectorApp.win.minimised = true
+      setTimeout(() => {
+        connectorApp.win.minimised = false
+      }, 200)
+    }
+    let previewApp = api.portals.find(a => a.app === 'enpreview')
+    if (previewApp) {
+      previewApp.win.width = 400
+      previewApp.win.height = 300
+      previewApp.win.x = window.innerWidth - previewApp.win.width - 20
+      previewApp.win.y = 20
+      previewApp.win.minimised = true
+      setTimeout(() => {
+        previewApp.win.minimised = false
+      }, 200)
+    }
   }
   temp.x = 30
   temp.y = 30
@@ -132,12 +132,18 @@ export function makePortal ({ type, appName = 'App', data = {} }) {
 }
 
 export function makeSample (api) {
-  // api.portals.push(
-  //   makePortal({ type: 'connector', data: {} })
-  // )
-  // api.portals.push(
-  //   makePortal({ type: 'exec-env', data: {} })
-  // )
+  if (AppList.AppList.map(e => e.compoName).includes('enedit')) {
+    api.portals.push(
+      makePortal({ type: 'enedit', data: {}, appName: AppList.AppList.find(e => e.compoName === 'enedit').windowTitle })
+    )
+  }
+
+  if (AppList.AppList.map(e => e.compoName).includes('enpreview')) {
+    api.portals.push(
+      makePortal({ type: 'enpreview', data: {}, appName: AppList.AppList.find(e => e.compoName === 'enpreview').windowTitle })
+    )
+  }
+
   api.organise()
 }
 
@@ -241,9 +247,11 @@ export function init () {
   var mod = {}
   mod.meta = {}
   mod.portals = []
+
   mod.makeSample = () => {
     makeSample(mod)
   }
+
   mod.isIn3D = () => {
     return isIn3D(mod)
   }
