@@ -2,7 +2,7 @@
   <div>
     <h1>Projects in window.localStorage</h1>
     <span class="linker" @click="addProject">Add Project</span>
-    <span class="linker" @click="loadProject"> Load Project</span>
+    <span class="linker" @click="loadProject"> Import Project</span>
 
     <ul>
       <li :key="project.projectID" v-for="project in projects">
@@ -51,7 +51,7 @@ export default {
               EffectNodeAPI.saveDB({ sess, data })
               this.projects.push({
                 projectID: sess,
-                name: window.prompt('new name of the imported project?') || 'imported project'
+                name: files[0].name// window.prompt('new name of the imported project?') || 'imported project'
               })
               this.saveProjects()
             } catch (e) {
@@ -81,8 +81,10 @@ export default {
       this.saveProjects()
     },
     removeProject (project) {
-      this.projects.splice(this.projects.findIndex(pj => pj.projectID === project.projectID), 1)
-      this.$emit('remove-project', project)
+      if (window.confirm('delte?')) {
+        this.projects.splice(this.projects.findIndex(pj => pj.projectID === project.projectID), 1)
+        this.$emit('remove-project', project)
+      }
     },
     saveProjects () {
       let nsID = window.localStorage.getItem(this.ns)
