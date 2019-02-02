@@ -2,7 +2,13 @@
 
 ![EffectNode OS][demo-1]
 
-[demo-1]: https://raw.githubusercontent.com/EffectNode/EffectNode-Lib/master/public/demo/enos-full.png
+[demo-1]: https://raw.githubusercontent.com/EffectNode/EffectNode-Lib/master/public/demo/enos.png
+
+# Using Effect Node
+
+![EffectNode OS][demo-2]
+
+[demo-2]: https://raw.githubusercontent.com/EffectNode/EffectNode-Lib/master/public/demo/enos-full.png
 
 # Install
 
