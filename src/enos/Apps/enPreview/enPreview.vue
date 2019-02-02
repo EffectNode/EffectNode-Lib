@@ -91,8 +91,8 @@ export default {
   methods: {
     getJSON () {
       var a = document.createElement('a')
-      a.href = URL.createObjectURL(new Blob([JSON.stringify(this.Doc)]))
-      a.download = 'EffectNode.json'
+      a.href = URL.createObjectURL(new Blob([JSON.stringify(this.Doc, null, '  ')]))
+      a.download = (window.prompt('what\'s the name of the project?') || 'EffectNode') + `.json`
       a.click()
     },
     setSquare () {

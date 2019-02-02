@@ -131,7 +131,12 @@ export const saveDB = ({ sess, data }) => {
 export const loadDB = ({ sess }) => {
   let data = window.localStorage.getItem(`${NS}-${sess}`)
   if (data) {
-    return JSON.parse(data)
+    try {
+      return JSON.parse(data)
+    } catch (e) {
+      console.log('bad json', e)
+      return null
+    }
   } else {
     return null
   }
@@ -142,7 +147,7 @@ export const hydrateDoc = ({ Doc }) => {
   if (dbData) {
     Doc.root = dbData
   } else {
-    let defaultJSON = require('./default-en.json')
+    let defaultJSON = require('./defaults/dom.json')
     Doc.root = defaultJSON.root
   }
 }
