@@ -40,7 +40,7 @@ export default {
       default: true
     },
     single: {
-      default: true
+      default: false
     }
   },
   components: {
