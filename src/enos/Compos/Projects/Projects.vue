@@ -51,6 +51,14 @@ export default {
       {
         name: 'Basic DOM',
         data: require('../APIs/defaults/dom.json')
+      },
+      {
+        name: 'Iris',
+        data: require('./starters/iris.json')
+      },
+      {
+        name: 'Star Ball',
+        data: require('./starters/star-ball.json')
       }
     ]
     this.hydrateProjects()
