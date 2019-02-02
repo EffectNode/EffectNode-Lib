@@ -38,6 +38,9 @@ export default {
     },
     effectnode: {
       default: true
+    },
+    single: {
+      default: true
     }
   },
   components: {
@@ -62,7 +65,8 @@ export default {
 
     if (!this.effectnode) {
       this.init({ sessionID: getID() })
-    } else {
+    } else if (this.single) {
+      this.init({ sessionID: sessionID })
     }
   },
   methods: {

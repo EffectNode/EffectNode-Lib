@@ -48,9 +48,13 @@ export default {
         name: 'NOVA WebGL',
         data: require('./starters/nova.json')
       },
+      // {
+      //   name: 'Basic DOM',
+      //   data: require('../APIs/defaults/dom.json')
+      // },
       {
         name: 'Basic DOM',
-        data: require('../APIs/defaults/dom.json')
+        data: require('./starters/dom.json')
       },
       {
         name: 'Iris WebGL',

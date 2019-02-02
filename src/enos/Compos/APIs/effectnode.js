@@ -147,7 +147,7 @@ export const hydrateDoc = ({ Doc }) => {
   if (dbData) {
     Doc.root = dbData
   } else {
-    let defaultJSON = require('./defaults/dom.json')
+    let defaultJSON = require('../Projects/starters/iris.json')
     Doc.root = defaultJSON.root
   }
 }

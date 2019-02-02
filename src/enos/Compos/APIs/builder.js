@@ -17,7 +17,7 @@ import Vue from 'vue/dist/vue.common'
 
 /* eslint-disable */
 let loadNewCache = async () => await {
-  // 'https://cdn.jsdelivr.net/npm/whammy@0.0.1/whammy.min.js': await import('raw-loader!../../../../public/js/lib/encoder/whammy.js'),
+  'https://cdn.jsdelivr.net/npm/whammy@0.0.1/whammy.min.js': require('raw-loader!../../../../public/js/lib/encoder/whammy.js.txt'),
   // 'https://threejs.org/build/three.min.js': await import('raw-loader!../../../../public/js/lib/ThreeJS/three.min.js'),
   // 'https://threejs.org/examples/js/controls/OrbitControls.js': await import('raw-loader!../../../../public/js/lib/ThreeJS/examples/js/controls/OrbitControls.js'),
   // 'https://threejs.org/examples/js/postprocessing/EffectComposer.js': await import('raw-loader!../../../../public/js/lib/ThreeJS/examples/js/postprocessing/EffectComposer.js'),
