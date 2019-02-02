@@ -59,6 +59,10 @@ export default {
       {
         name: 'Star Ball WebGL',
         data: require('./starters/star-ball.json')
+      },
+      {
+        name: 'Particle Sea WebGL',
+        data: require('./starters/particle-sea.json')
       }
     ]
     this.hydrateProjects()

@@ -37,7 +37,7 @@ export default {
       default: 'RSSID'
     },
     effectnode: {
-      default: false
+      default: true
     }
   },
   components: {
@@ -47,7 +47,7 @@ export default {
   },
   data () {
     return {
-      view: 'projects',
+      view: this.effectnode ? 'projects' : 'enos',
       uiAPI: false,
       sessionID: 0
     }
