@@ -53,11 +53,11 @@ export default {
         data: require('../APIs/defaults/dom.json')
       },
       {
-        name: 'Iris',
+        name: 'Iris WebGL',
         data: require('./starters/iris.json')
       },
       {
-        name: 'Star Ball',
+        name: 'Star Ball WebGL',
         data: require('./starters/star-ball.json')
       }
     ]
