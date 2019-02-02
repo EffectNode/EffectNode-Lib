@@ -29,7 +29,7 @@ npm i enos --save
 ```vue
 
 <template>
-  <div class="hello"><enos v-if="myApps" :apps="myApps"></enos></div>
+  <div class="hello"><enos v-if="myApps" :effectnode="true" :apps="myApps"></enos></div>
 </template>
 
 <script>
