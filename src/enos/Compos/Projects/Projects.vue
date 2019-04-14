@@ -1,27 +1,36 @@
 <template>
-  <div>
-    <h2>
-      Clone From Template
-    </h2>
+  <div class="library">
+    <h1>Effect Node Templates</h1>
+    <div class="templates">
+      <div class="template" :key="start.name" v-for="start in starters">
+        <div class="template-tile"  @click="starterProject({ name: start.name, Doc: start.data })">
+         <span class="linker">{{ start.name }}</span>
+        </div>
+      </div>
+    </div>
+    <p>
+      P.S. All templates are MIT licensed
+    </p>
+
+    <h1>
+      Load Projects
+    </h1>
     <ul>
       <li><span class="linker" @click="importProject"> Import Project</span></li>
     </ul>
-    <ul>
-      <li :key="start.name" v-for="start in starters">
-         <span class="linker" @click="starterProject({ Doc: start.data })">{{ start.name }}</span>
-      </li>
-    </ul>
 
-    <h1>Projects in window.localStorage</h1>
-    <ul>
-      <li :key="project.projectID" v-for="project in projects">
-        <input type="text" v-model="project.name" @input="saveProjects()" />
+    <div v-if="projects.length > 0">
+      <h1>My Projects</h1>
+      <ul>
+        <li :key="project.projectID" v-for="project in projects">
+          <input type="text" v-model="project.name" @input="saveProjects()" />
 
-        <span class="linker" @click="$emit('load', project)"> Enter </span>
-        <span class="linker" @click="removeProject(project)"> Remove</span>
-        <span class="linker" @click="exportProject(project)"> Export </span>
-      </li>
-    </ul>
+          <span class="linker" @click="$emit('load', project)"> Enter </span>
+          <span class="linker" @click="removeProject(project)"> Remove</span>
+          <span class="linker" @click="exportProject(project)"> Export </span>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -72,12 +81,12 @@ export default {
     this.hydrateProjects()
   },
   methods: {
-    starterProject ({ Doc }) {
+    starterProject ({ name, Doc }) {
       let sess = getID()
       EffectNodeAPI.saveDB({ sess, data: Doc.root })
       this.projects.push({
         projectID: sess,
-        name: window.prompt('new name of the imported project?') || 'imported project'
+        name: name || 'imported project'
       })
       this.saveProjects()
     },
@@ -156,5 +165,25 @@ export default {
 <style scoped>
 .linker{
   text-decoration: underline;
+}
+.library{
+  margin: 30px;
+}
+.template{
+  display: inline-block;
+  margin-right: 13px;
+  margin-bottom: 13px;
+  width: 120px;
+  height: 120px;
+  background: rgba(255,255,255,0.3);
+  overflow: hidden;
+  cursor: pointer;
+}
+.template-tile{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 </style>
